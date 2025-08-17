@@ -1,144 +1,150 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Project setup
-
-```bash
-$ npm install
-```
-
-## Compile and run the project
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Run tests
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
-
 # Dify Gateway
 
-这是一个基于 NestJS 和 Prisma 的网关服务，提供 Dify 应用的 API 接口。
+基于 NestJS 和 Prisma 的 Dify 应用管理网关服务，提供完整的应用 CRUD 操作接口。
 
-## 功能特性
+## 技术架构
 
-- 基于 NestJS 框架
-- 使用 Prisma ORM 连接数据库
-- 提供 App 管理接口
-- 支持环境变量配置
+### 整体架构
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Admin Web     │    │   Gateway       │    │   PostgreSQL    │
+│   (React)       │◄──►│   (NestJS)      │◄──►│   Database      │
+│   Port: 3000    │    │   Port: 3003    │    │   Port: 5432    │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+```
 
-## 安装依赖
+### 技术栈
+- **后端框架**: NestJS (Node.js)
+- **ORM**: Prisma
+- **数据库**: PostgreSQL
+- **API 文档**: 自动生成
+- **验证**: class-validator
+- **序列化**: class-transformer
 
+### 项目结构
+```
+src/
+├── apps/                    # 应用管理模块
+│   ├── dto/                # 数据传输对象
+│   │   ├── create-app.dto.ts
+│   │   └── update-app.dto.ts
+│   ├── apps.controller.ts  # 控制器层
+│   ├── apps.service.ts     # 服务层
+│   └── apps.module.ts      # 模块定义
+├── prisma/                 # 数据库配置
+│   ├── prisma.service.ts   # Prisma 服务
+│   └── prisma.module.ts    # Prisma 模块
+├── app.controller.ts       # 根控制器
+├── app.service.ts          # 根服务
+├── app.module.ts           # 根模块
+└── main.ts                 # 应用入口
+```
+
+### 分层架构
+1. **Controller 层**: 处理 HTTP 请求，参数验证，响应格式化
+2. **Service 层**: 业务逻辑处理，数据操作
+3. **Repository 层**: 数据访问层 (通过 Prisma)
+4. **DTO 层**: 数据传输对象，定义接口契约
+
+## 数据表设计
+
+### App 表 (apps， 跟dify共用)
+具体查看[schema.prisma](./prisma/schema.prisma)
+应用核心信息表，存储所有应用的基本信息。
+
+```sql
+CREATE TABLE apps (
+  id                  UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  tenant_id           UUID NOT NULL,                    -- 租户ID
+  name                VARCHAR(255) NOT NULL,            -- 应用名称
+  mode                VARCHAR(255) NOT NULL,            -- 应用模式 (chat/completion/workflow)
+  icon                VARCHAR(255),                     -- 应用图标
+  icon_background     VARCHAR(255),                     -- 图标背景色
+  app_model_config_id UUID,                             -- 模型配置ID
+  status              VARCHAR(255) DEFAULT 'normal',    -- 应用状态 (normal/disabled/maintenance)
+  enable_site         BOOLEAN DEFAULT false,            -- 是否启用网站
+  enable_api          BOOLEAN DEFAULT false,            -- 是否启用API
+  api_rpm             INTEGER DEFAULT 0,                -- API每分钟请求限制
+  api_rph             INTEGER DEFAULT 0,                -- API每小时请求限制
+  is_demo             BOOLEAN DEFAULT false,            -- 是否为演示应用
+  is_public           BOOLEAN DEFAULT false,            -- 是否为公开应用
+  is_universal        BOOLEAN DEFAULT false,            -- 是否为通用应用
+  created_at          TIMESTAMP DEFAULT NOW(),          -- 创建时间
+  updated_at          TIMESTAMP DEFAULT NOW()           -- 更新时间
+);
+```
+
+### Workflow 表 (workflows， 跟dify共用)
+工作流配置表，存储工作流的详细配置信息。
+
+```sql
+CREATE TABLE workflows (
+  id                     UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  tenant_id              UUID NOT NULL,                    -- 租户ID
+  app_id                 UUID NOT NULL,                    -- 关联的应用ID
+  type                   VARCHAR(255) NOT NULL,            -- 工作流类型
+  version                VARCHAR(255) NOT NULL,            -- 版本号
+  graph                  TEXT NOT NULL,                    -- 工作流图配置 (JSON)
+  features               TEXT NOT NULL,                    -- 功能配置 (JSON)
+  created_by             UUID NOT NULL,                    -- 创建者ID
+  created_at             TIMESTAMP DEFAULT NOW(),          -- 创建时间
+  updated_by             UUID,                             -- 更新者ID
+  updated_at             TIMESTAMP DEFAULT NOW(),          -- 更新时间
+  environment_variables  TEXT DEFAULT '{}',                -- 环境变量 (JSON)
+  conversation_variables TEXT DEFAULT '{}',                -- 对话变量 (JSON)
+  marked_name            VARCHAR DEFAULT '',               -- 标记名称
+  marked_comment         VARCHAR DEFAULT ''                -- 标记注释
+);
+```
+
+### 关系设计
+- **App ↔ Workflow**: 一对一关系, 来自dify自身设计
+
+## API 接口
+
+### 应用管理接口
+
+| 方法 | 路径 | 描述 | 请求体 |
+|------|------|------|--------|
+| GET | `/dify/apps` | 获取所有应用列表 | - |
+| POST | `/dify/apps` | 创建新应用 | CreateAppDto |
+| GET | `/dify/app/:id` | 获取指定应用详情 | - |
+| PATCH | `/dify/app/:id` | 更新指定应用 | UpdateAppDto |
+| DELETE | `/dify/app/:id` | 删除指定应用 | - |
+
+## 快速开始
+
+### 环境要求
+- Node.js >= 18
+- PostgreSQL >= 13
+- npm >= 8
+
+### 安装依赖
 ```bash
 npm install
 ```
 
-## 环境配置
-
-在 `.env` 文件中配置数据库连接信息：
-
+### 环境配置
+创建 `.env` 文件：
 ```env
-# Database Configuration
+# 数据库配置
 DATABASE_URL="postgresql://username:password@localhost:5432/dify_gateway?schema=public"
 
-# Application Configuration
-PORT=3001
+# 应用配置
+PORT=3003
 NODE_ENV=development
 ```
 
-## 数据库迁移
-
+### 数据库迁移
 ```bash
-# 生成迁移文件
-npx prisma migrate dev --name init
+# 生成 Prisma 客户端
+npx prisma generate
 
-# 应用迁移到数据库
-npx prisma migrate deploy
+# 运行数据库迁移
+npx prisma migrate dev --name init
 ```
 
-## 运行项目
-
+### 启动服务
 ```bash
 # 开发模式
 npm run start:dev
@@ -147,74 +153,30 @@ npm run start:dev
 npm run start:prod
 ```
 
-## API 接口
-
-### Apps 管理
-
-- `GET /dify/apps` - 获取所有应用列表
-- `POST /dify/apps` - 创建新应用
-- `GET /dify/app/:id` - 获取指定应用详情
-- `PATCH /dify/app/:id` - 更新指定应用
-- `DELETE /dify/app/:id` - 删除指定应用（软删除）
-
-### 创建应用示例
-
+### 测试接口
 ```bash
-curl -X POST http://localhost:3001/dify/apps \
+# 获取应用列表
+curl http://localhost:3003/dify/apps
+
+# 创建应用
+curl -X POST http://localhost:3003/dify/apps \
   -H "Content-Type: application/json" \
   -d '{
+    "tenant_id": "9f8d0961-db16-4b75-a673-27f75571e0c4",
     "name": "测试应用",
-    "description": "这是一个测试应用",
-    "type": "chatbot",
     "mode": "chat",
-    "is_public": true
+    "icon": "🤖",
+    "icon_background": "#FFEAD5"
   }'
 ```
 
-### 获取应用列表
+## 部署
 
+### Docker 部署
 ```bash
-curl http://localhost:3001/dify/apps
-```
+# 构建镜像
+docker build -t dify-gateway .
 
-### 更新应用
-
-```bash
-curl -X PATCH http://localhost:3001/dify/app/{app_id} \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "更新后的应用名称",
-    "description": "更新后的描述"
-  }'
-```
-
-## 项目结构
-
-```
-src/
-├── apps/                 # 应用管理模块
-│   ├── dto/             # 数据传输对象
-│   ├── apps.controller.ts
-│   ├── apps.service.ts
-│   └── apps.module.ts
-├── prisma/              # Prisma 配置
-│   ├── prisma.service.ts
-│   └── prisma.module.ts
-├── app.controller.ts
-├── app.service.ts
-├── app.module.ts
-└── main.ts
-```
-
-## 开发
-
-```bash
-# 运行测试
-npm run test
-
-# 运行 e2e 测试
-npm run test:e2e
-
-# 代码检查
-npm run lint
+# 运行容器
+docker run -p 3003:3003 dify-gateway
 ```

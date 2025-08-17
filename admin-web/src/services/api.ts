@@ -1,6 +1,6 @@
 // import axios from 'axios'; // 暂时注释，用于未来真实API集成
-import { DifyBot, CreateBotRequest, UpdateBotRequest, ApiResponse } from '../types/dify';
-import { mockBots } from '../data/mockData';
+import { DifyApp, CreateAppRequest, UpdateAppRequest, ApiResponse } from '../types/dify';
+import { mockApps } from '../data/mockData';
 
 // 创建axios实例（暂时未使用，保留用于未来真实API集成）
 // const api = axios.create({
@@ -21,133 +21,138 @@ const mockApiResponse = <T>(data: T, success = true, message?: string): ApiRespo
   message,
 });
 
-// 获取所有机器人列表
-export const getBots = async (): Promise<ApiResponse<DifyBot[]>> => {
+// 获取所有应用列表
+export const getApps = async (): Promise<ApiResponse<DifyApp[]>> => {
   try {
     // 模拟API调用延迟
     await delay(500);
-    
+
     // 模拟成功响应
-    return mockApiResponse(mockBots);
-    
+    return mockApiResponse(mockApps);
+
     // 实际API调用（注释掉，使用mock数据）
-    // const response = await api.get<ApiResponse<DifyBot[]>>('/bots');
+    // const response = await api.get<ApiResponse<DifyApp[]>>('/apps');
     // return response.data;
   } catch (error) {
-    console.error('获取机器人列表失败:', error);
-    return mockApiResponse([], false, '获取机器人列表失败');
+    console.error('获取应用列表失败:', error);
+    return mockApiResponse([], false, '获取应用列表失败');
   }
 };
 
-// 获取单个机器人详情
-export const getBot = async (id: string): Promise<ApiResponse<DifyBot>> => {
+// 获取单个应用详情
+export const getApp = async (id: string): Promise<ApiResponse<DifyApp>> => {
   try {
     await delay(300);
-    
-    const bot = mockBots.find(b => b.id === id);
-    if (!bot) {
-      return mockApiResponse({} as DifyBot, false, '机器人不存在');
+
+    const app = mockApps.find(a => a.id === id);
+    if (!app) {
+      return mockApiResponse({} as DifyApp, false, '应用不存在');
     }
-    
-    return mockApiResponse(bot);
+
+    return mockApiResponse(app);
   } catch (error) {
-    console.error('获取机器人详情失败:', error);
-    return mockApiResponse({} as DifyBot, false, '获取机器人详情失败');
+    console.error('获取应用详情失败:', error);
+    return mockApiResponse({} as DifyApp, false, '获取应用详情失败');
   }
 };
 
-// 创建新机器人
-export const createBot = async (botData: CreateBotRequest): Promise<ApiResponse<DifyBot>> => {
+// 创建新应用
+export const createApp = async (appData: CreateAppRequest): Promise<ApiResponse<DifyApp>> => {
   try {
     await delay(800);
-    
-    const newBot: DifyBot = {
+
+    const newApp: DifyApp = {
       id: Date.now().toString(),
-      ...botData,
-      status: 'active',
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      apiKey: `sk-${Math.random().toString(36).substring(2, 15)}`,
-      endpoint: 'https://api.dify.ai/v1/chat-messages',
+      ...appData,
+      status: appData.status || 'normal',
+      enable_site: appData.enable_site || false,
+      enable_api: appData.enable_api || false,
+      api_rpm: appData.api_rpm || 0,
+      api_rph: appData.api_rph || 0,
+      is_demo: appData.is_demo || false,
+      is_public: appData.is_public || false,
+      is_universal: appData.is_universal || false,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
     };
-    
-    // 在实际应用中，这里会将新机器人添加到数据库
-    mockBots.push(newBot);
-    
-    return mockApiResponse(newBot, true, '机器人创建成功');
+
+    // 在实际应用中，这里会将新应用添加到数据库
+    mockApps.push(newApp);
+
+    return mockApiResponse(newApp, true, '应用创建成功');
   } catch (error) {
-    console.error('创建机器人失败:', error);
-    return mockApiResponse({} as DifyBot, false, '创建机器人失败');
+    console.error('创建应用失败:', error);
+    return mockApiResponse({} as DifyApp, false, '创建应用失败');
   }
 };
 
-// 更新机器人
-export const updateBot = async (botData: UpdateBotRequest): Promise<ApiResponse<DifyBot>> => {
+// 更新应用
+export const updateApp = async (appData: UpdateAppRequest): Promise<ApiResponse<DifyApp>> => {
   try {
     await delay(600);
-    
-    const index = mockBots.findIndex(b => b.id === botData.id);
+
+    const index = mockApps.findIndex(a => a.id === appData.id);
     if (index === -1) {
-      return mockApiResponse({} as DifyBot, false, '机器人不存在');
+      return mockApiResponse({} as DifyApp, false, '应用不存在');
     }
-    
-    const updatedBot = {
-      ...mockBots[index],
-      ...botData,
-      updatedAt: new Date().toISOString(),
+
+    const updatedApp = {
+      ...mockApps[index],
+      ...appData,
+      updated_at: new Date().toISOString(),
     };
-    
-    mockBots[index] = updatedBot;
-    
-    return mockApiResponse(updatedBot, true, '机器人更新成功');
+
+    mockApps[index] = updatedApp;
+
+    return mockApiResponse(updatedApp, true, '应用更新成功');
   } catch (error) {
-    console.error('更新机器人失败:', error);
-    return mockApiResponse({} as DifyBot, false, '更新机器人失败');
+    console.error('更新应用失败:', error);
+    return mockApiResponse({} as DifyApp, false, '更新应用失败');
   }
 };
 
-// 删除机器人
-export const deleteBot = async (id: string): Promise<ApiResponse<boolean>> => {
+// 删除应用
+export const deleteApp = async (id: string): Promise<ApiResponse<boolean>> => {
   try {
     await delay(400);
-    
-    const index = mockBots.findIndex(b => b.id === id);
+
+    const index = mockApps.findIndex(a => a.id === id);
     if (index === -1) {
-      return mockApiResponse(false, false, '机器人不存在');
+      return mockApiResponse(false, false, '应用不存在');
     }
-    
-    mockBots.splice(index, 1);
-    
-    return mockApiResponse(true, true, '机器人删除成功');
+
+    mockApps.splice(index, 1);
+
+    return mockApiResponse(true, true, '应用删除成功');
   } catch (error) {
-    console.error('删除机器人失败:', error);
-    return mockApiResponse(false, false, '删除机器人失败');
+    console.error('删除应用失败:', error);
+    return mockApiResponse(false, false, '删除应用失败');
   }
 };
 
-// 切换机器人状态
-export const toggleBotStatus = async (id: string): Promise<ApiResponse<DifyBot>> => {
+// 切换应用状态
+export const toggleAppStatus = async (id: string): Promise<ApiResponse<DifyApp>> => {
   try {
     await delay(300);
-    
-    const bot = mockBots.find(b => b.id === id);
-    if (!bot) {
-      return mockApiResponse({} as DifyBot, false, '机器人不存在');
+
+    const app = mockApps.find(a => a.id === id);
+    if (!app) {
+      return mockApiResponse({} as DifyApp, false, '应用不存在');
     }
-    
-    const newStatus: 'active' | 'inactive' | 'maintenance' = bot.status === 'active' ? 'inactive' : 'active';
-    const updatedBot: DifyBot = {
-      ...bot,
+
+    const newStatus = app.status === 'normal' ? 'disabled' : 'normal';
+    const updatedApp: DifyApp = {
+      ...app,
       status: newStatus,
-      updatedAt: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
     };
-    
-    const index = mockBots.findIndex(b => b.id === id);
-    mockBots[index] = updatedBot;
-    
-    return mockApiResponse(updatedBot, true, `机器人状态已切换为${newStatus}`);
+
+    const index = mockApps.findIndex(a => a.id === id);
+    mockApps[index] = updatedApp;
+
+    return mockApiResponse(updatedApp, true, `应用状态已切换为${newStatus}`);
   } catch (error) {
-    console.error('切换机器人状态失败:', error);
-    return mockApiResponse({} as DifyBot, false, '切换机器人状态失败');
+    console.error('切换应用状态失败:', error);
+    return mockApiResponse({} as DifyApp, false, '切换应用状态失败');
   }
 };

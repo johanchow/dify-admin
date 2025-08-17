@@ -1,30 +1,41 @@
-export interface DifyBot {
+export interface DifyApp {
   id: string;
+  tenant_id: string;
   name: string;
-  description: string;
-  status: 'active' | 'inactive' | 'maintenance';
-  model: string;
-  createdAt: string;
-  updatedAt: string;
-  apiKey: string;
-  endpoint: string;
-  maxTokens: number;
-  temperature: number;
-  category: string;
-  tags: string[];
+  mode: string;
+  icon?: string;
+  icon_background?: string;
+  app_model_config_id?: string;
+  status: string;
+  enable_site: boolean;
+  enable_api: boolean;
+  api_rpm: number;
+  api_rph: number;
+  is_demo: boolean;
+  is_public: boolean;
+  created_at: string;
+  updated_at: string;
+  is_universal: boolean;
 }
 
-export interface CreateBotRequest {
+export interface CreateAppRequest {
+  tenant_id: string;
   name: string;
-  description: string;
-  model: string;
-  maxTokens: number;
-  temperature: number;
-  category: string;
-  tags: string[];
+  mode: string;
+  icon?: string;
+  icon_background?: string;
+  app_model_config_id?: string;
+  status?: string;
+  enable_site?: boolean;
+  enable_api?: boolean;
+  api_rpm?: number;
+  api_rph?: number;
+  is_demo?: boolean;
+  is_public?: boolean;
+  is_universal?: boolean;
 }
 
-export interface UpdateBotRequest extends Partial<CreateBotRequest> {
+export interface UpdateAppRequest extends Partial<CreateAppRequest> {
   id: string;
 }
 

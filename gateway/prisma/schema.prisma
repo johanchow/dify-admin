@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model App {
+  id                  String   @id @default(uuid()) @db.Uuid
+  tenant_id           String   @db.Uuid
+  name                String   @db.VarChar(255)
+  mode                String   @db.VarChar(255)
+  icon                String?  @db.VarChar(255)
+  icon_background     String?  @db.VarChar(255)
+  app_model_config_id String?  @db.Uuid
+  status              String   @default("normal") @db.VarChar(255)
+  enable_site         Boolean  @default(false)
+  enable_api          Boolean  @default(false)
+  api_rpm             Int      @default(0)
+  api_rph             Int      @default(0)
+  is_demo             Boolean  @default(false)
+  is_public           Boolean  @default(false)
+  created_at          DateTime @default(now())
+  updated_at          DateTime @default(now())
+  is_universal        Boolean  @default(false)
+
+  @@map("apps")
+}
+
+model Workflow {
+  id                     String   @id @default(uuid()) @db.Uuid
+  tenant_id              String   @db.Uuid
+  app_id                 String   @db.Uuid
+  type                   String   @db.VarChar(255)
+  version                String   @db.VarChar(255)
+  graph                  String   @db.Text
+  features               String   @db.Text
+  created_by             String   @db.Uuid
+  created_at             DateTime @default(now())
+  updated_by             String?  @db.Uuid
+  updated_at             DateTime @default(now())
+  environment_variables  String   @default("{}") @db.Text
+  conversation_variables String   @default("{}") @db.Text
+  marked_name            String   @default("") @db.VarChar
+  marked_comment         String   @default("") @db.VarChar
+
+  @@map("workflows")
+}

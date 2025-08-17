@@ -58,6 +58,10 @@ const AppList: React.FC<AppListProps> = ({ onEditApp, onRefresh }) => {
     }
   };
 
+  const jumpToDetail = (id: string) => {
+    window.open(`http://localhost/app/${id}/workflow`, '_blank');
+  };
+
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'normal': return 'green';
@@ -119,9 +123,9 @@ const AppList: React.FC<AppListProps> = ({ onEditApp, onRefresh }) => {
                 <div className="app-actions">
                   <button
                     className={`status-btn ${getStatusColor(app.status)}`}
-                    onClick={() => handleToggleStatus(app.id)}
+                    onClick={() => jumpToDetail(app.id)}
                   >
-                    {getStatusText(app.status)}
+                    详情
                   </button>
                   <button
                     className="edit-btn"

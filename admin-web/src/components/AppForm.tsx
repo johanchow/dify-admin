@@ -16,7 +16,6 @@ const AppForm: React.FC<AppFormProps> = ({ app, onSave, onCancel }) => {
     mode: 'chat',
     icon: '',
     icon_background: '#4CAF50',
-    app_model_config_id: '',
     status: 'normal',
     enable_site: false,
     enable_api: false,
@@ -39,7 +38,6 @@ const AppForm: React.FC<AppFormProps> = ({ app, onSave, onCancel }) => {
         mode: app.mode,
         icon: app.icon || '',
         icon_background: app.icon_background || '#4CAF50',
-        app_model_config_id: app.app_model_config_id || '',
         status: app.status,
         enable_site: app.enable_site,
         enable_api: app.enable_api,
@@ -222,7 +220,7 @@ const AppForm: React.FC<AppFormProps> = ({ app, onSave, onCancel }) => {
             />
           </div>
 
-          <div className="form-group">
+          {/* <div className="form-group">
             <label htmlFor="app_model_config_id">模型配置ID</label>
             <input
               type="text"
@@ -231,7 +229,7 @@ const AppForm: React.FC<AppFormProps> = ({ app, onSave, onCancel }) => {
               value={formData.app_model_config_id}
               onChange={handleInputChange}
             />
-          </div>
+          </div> */}
 
           <div className="form-group">
             <label htmlFor="status">状态</label>

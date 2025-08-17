@@ -13,9 +13,6 @@
   color: white;
   padding: 20px 0;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 0;
-  z-index: 100;
 }
 
 .header-content {
@@ -27,40 +24,58 @@
   align-items: center;
 }
 
-.app-header h1 {
+.header-content h1 {
   margin: 0;
   font-size: 28px;
   font-weight: 600;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.create-btn, .test-btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .create-btn {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: #4CAF50;
   color: white;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
 }
 
 .create-btn:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-  border-color: rgba(255, 255, 255, 0.5);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background-color: #45a049;
+  transform: translateY(-1px);
 }
 
-.create-btn:active {
-  transform: translateY(0);
+.test-btn {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.test-btn:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
 }
 
 .app-main {
-  flex: 1;
-  padding: 20px 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: calc(100vh - 100px);
 }
 
 /* 全局按钮样式 */
@@ -152,16 +167,20 @@
     gap: 15px;
     text-align: center;
   }
-  
-  .app-header h1 {
+
+  .header-content h1 {
     font-size: 24px;
   }
-  
-  .create-btn {
+
+  .header-actions {
+    flex-direction: column;
     width: 100%;
-    max-width: 200px;
   }
-  
+
+  .create-btn, .test-btn {
+    width: 100%;
+  }
+
   .app-main {
     padding: 15px 0;
   }

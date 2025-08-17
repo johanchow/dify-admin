@@ -35,12 +35,14 @@ function App() {
       <header className="app-header">
         <div className="header-content">
           <h1>Dify 应用管理系统</h1>
-          <button
-            className="create-btn"
-            onClick={handleCreateApp}
-          >
-            + 创建应用
-          </button>
+          <div className="header-actions">
+            <button
+              className="create-btn"
+              onClick={handleCreateApp}
+            >
+              + 创建应用
+            </button>
+          </div>
         </div>
       </header>
 
